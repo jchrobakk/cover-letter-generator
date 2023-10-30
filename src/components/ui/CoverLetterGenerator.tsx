@@ -3,8 +3,10 @@
 import { CoverLetter } from '../CoverLetter';
 import { CoverLetterForm } from '../CoverLetterForm';
 import { useState } from 'react';
+import { useToast } from './use-toast';
 
 export const CoverLetterGenerator = () => {
+  const { toast } = useToast();
   const [coverLetter, setCoverLetter] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
 
@@ -13,6 +15,7 @@ export const CoverLetterGenerator = () => {
     jobTitle: string,
     jobDescription: string
   ) => {
+    setLoading(true);
     const res = await fetch('/api', {
       headers: {
         type: 'application/json',
@@ -25,8 +28,15 @@ export const CoverLetterGenerator = () => {
       }),
     });
     const data = await res.json();
-    console.log(data);
-    setCoverLetter(data.content);
+    setCoverLetter(data.coverLetterContent);
+    setLoading(false);
+
+    () => {
+      toast({
+        title: 'Cover letter generated',
+        description: 'You can copy-paste it now',
+      });
+    };
   };
   return (
     <>
@@ -34,7 +44,10 @@ export const CoverLetterGenerator = () => {
         loading={loading}
         onSubmit={fetchCoverLetter}
       />
-      <CoverLetter content={coverLetter} />
+      <CoverLetter
+        loading={loading}
+        content={coverLetter}
+      />
     </>
   );
 };

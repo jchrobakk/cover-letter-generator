@@ -3,12 +3,8 @@ import { NextRequest } from 'next/server';
 export async function POST(request: NextRequest) {
   const { content, title, description } = await request.json();
 
-  console.log('content', content);
-  console.log('title', title);
-  console.log('description', description);
-
   const payload = {
-    model: 'gpt-3.5-turbo-16k', // gpt-4 or gpt-3.5-turbo-16k
+    model: 'gpt-3.5-turbo', // gpt-4 or gpt-3.5-turbo-16k
     messages: [
       {
         role: 'system',
@@ -23,7 +19,7 @@ You will write the cover letter in a modern, professional style without being to
         content: `My Resume: ${content}. Job title: ${title} Job Description: ${description}.`,
       },
     ],
-    temperature: 30,
+    temperature: 0.2,
   };
 
   try {
@@ -38,14 +34,9 @@ You will write the cover letter in a modern, professional style without being to
 
     const json = await response.json();
 
-    const data = {
-      title,
-      content: json?.choices[0].message.content,
-      tokenUsage: json?.usage.completion_tokens,
-    };
-
-    console.log('data', data);
-    return Response.json({ data });
+    return Response.json({
+      coverLetterContent: json.choices[0].message.content,
+    });
   } catch (error) {
     console.log(error);
     return Response.json({ message: 'Error!' });

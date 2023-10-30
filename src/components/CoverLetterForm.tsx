@@ -39,6 +39,7 @@ export function CoverLetterForm({
   });
 
   function handleSubmit(data: z.infer<typeof FormSchema>) {
+    console.log('clicked');
     onSubmit(data.resume, data.jobTitle, data.jobDescription);
   }
 
@@ -46,7 +47,7 @@ export function CoverLetterForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleSubmit)}
-        className="flex flex-col gap-4 max-w-lg mx-auto"
+        className="flex flex-col gap-4 max-w-2xl mx-auto"
       >
         <FormField
           control={form.control}

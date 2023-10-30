@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { ModeToggle } from '@/components/ModeToggle';
+import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,7 +27,8 @@ export default function RootLayout({
           <nav className="flex justify-end">
             <ModeToggle />
           </nav>
-          <main>{children}</main>
+          <main className="mx-auto">{children}</main>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
