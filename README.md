@@ -2,6 +2,8 @@
 
 Generate cover letters tailored to your resume and the job description.
 
+![coverlettergenerator](https://github.com/jchrobakk/cover-letter-generator/assets/86983177/9f98615c-7622-4219-b895-a9dc6ef0cc29)
+
 ## Instalation
 
 Copy the repository
