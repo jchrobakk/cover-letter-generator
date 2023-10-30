@@ -1,10 +1,10 @@
 import { NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest) {
-  const { content, title, description } = await request.json();
+  const { content, title, description, gptModel } = await request.json();
 
   const payload = {
-    model: 'gpt-3.5-turbo', // gpt-4 or gpt-3.5-turbo-16k
+    model: gptModel, // gpt-4 or gpt-3.5-turbo-16k
     messages: [
       {
         role: 'system',

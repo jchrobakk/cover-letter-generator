@@ -14,6 +14,13 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from './ui/select';
 
 const FormSchema = z.object({
   resume: z.string().min(1, {
@@ -25,6 +32,9 @@ const FormSchema = z.object({
   jobDescription: z.string().min(1, {
     message: 'Please enter job description',
   }),
+  gptModel: z.string().min(1, {
+    message: 'Please select GPT model',
+  }),
 });
 
 export function CoverLetterForm({
@@ -32,15 +42,22 @@ export function CoverLetterForm({
   onSubmit,
 }: {
   loading: boolean;
-  onSubmit: (resume: string, jobTitle: string, jobDescription: string) => void;
+  onSubmit: (
+    resume: string,
+    jobTitle: string,
+    jobDescription: string,
+    gptModel: string
+  ) => void;
 }) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
+    defaultValues: {
+      gptModel: 'gpt-3.5-turbo',
+    },
   });
 
   function handleSubmit(data: z.infer<typeof FormSchema>) {
-    console.log('clicked');
-    onSubmit(data.resume, data.jobTitle, data.jobDescription);
+    onSubmit(data.resume, data.jobTitle, data.jobDescription, data.gptModel);
   }
 
   return (
@@ -98,6 +115,33 @@ export function CoverLetterForm({
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="gptModel"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>GPT Model</FormLabel>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a verified email to display" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="gpt-3.5-turbo">gpt-3.5-turbo</SelectItem>
+                  <SelectItem value="gpt-3.5-turbo-16k">
+                    gpt-3.5-turbo-16k
+                  </SelectItem>
+                  <SelectItem value="gpt-4">gpt-4</SelectItem>
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}

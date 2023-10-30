@@ -13,7 +13,8 @@ export const CoverLetterGenerator = () => {
   const fetchCoverLetter = async (
     resume: string,
     jobTitle: string,
-    jobDescription: string
+    jobDescription: string,
+    gptModel: string
   ) => {
     setLoading(true);
     const res = await fetch('/api', {
@@ -25,6 +26,7 @@ export const CoverLetterGenerator = () => {
         content: resume,
         title: jobTitle,
         description: jobDescription,
+        gptModel,
       }),
     });
     const data = await res.json();
