@@ -1,22 +1,12 @@
+import { CoverLetterGenerator } from '@/components/ui/CoverLetterGenerator';
+
 export default function Home() {
-  // const fetchCoverLetter = async () => {
-  //   const res = await fetch('/api', {
-  //     headers: {
-  //       type: 'application/json',
-  //     },
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //       content: 'Hello World!',
-  //       title: 'Title',
-  //       description: 'job description',
-  //     }),
-  //   });
-  //   const data = await res.json();
-  //   console.log(data);
-  // };
   return (
-    <main>
-      <p className="text-center">Hello World!</p>
+    <main className="mx-auto">
+      <h1 className="animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent text-5xl font-black text-center">
+        Cover Letter Generator
+      </h1>
+      <CoverLetterGenerator />
     </main>
   );
 }
