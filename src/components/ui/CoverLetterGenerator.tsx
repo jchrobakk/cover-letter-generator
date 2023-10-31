@@ -16,14 +16,6 @@ export const CoverLetterGenerator = () => {
     jobDescription: string,
     gptModel: string
   ) => {
-    if (!process.env.OPENAI_API_KEY) {
-      toast({
-        title: 'Missing OPENAI_API_KEY',
-        description:
-          'This is only demo app. I am not able to host it for free. You can clone it and host it yourself.',
-      });
-      return;
-    }
     setLoading(true);
     const res = await fetch('/api', {
       headers: {
