@@ -24,10 +24,10 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="system"
         >
-          <nav className="flex justify-end">
+          <nav className="flex justify-end px-4">
             <ModeToggle />
           </nav>
-          <main className="mx-auto">{children}</main>
+          <main className="mx-auto px-4">{children}</main>
           <Toaster />
         </ThemeProvider>
       </body>
