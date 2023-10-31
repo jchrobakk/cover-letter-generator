@@ -3,8 +3,16 @@ import { NextRequest } from 'next/server';
 export async function POST(request: NextRequest) {
   const { content, title, description, gptModel } = await request.json();
 
+  if (!content || !title || !description || !gptModel) {
+    return Response.json({ message: 'Error! Missing params' });
+  }
+
+  if (!process.env.OPENAI_API_KEY) {
+    return Response.json({ message: 'Error! No openai api key in .env' });
+  }
+
   const payload = {
-    model: gptModel, // gpt-4 or gpt-3.5-turbo-16k
+    model: gptModel,
     messages: [
       {
         role: 'system',
