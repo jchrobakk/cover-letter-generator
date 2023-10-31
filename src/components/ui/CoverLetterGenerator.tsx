@@ -33,12 +33,10 @@ export const CoverLetterGenerator = () => {
     setCoverLetter(data.coverLetterContent);
     setLoading(false);
 
-    () => {
-      toast({
-        title: 'Cover letter generated',
-        description: 'You can copy-paste it now',
-      });
-    };
+    toast({
+      title: 'Cover letter generated!',
+      description: 'You can click it to copy it to your clipboard.',
+    });
   };
   return (
     <>
